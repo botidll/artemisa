@@ -1,0 +1,104 @@
+<section class="todoapp">
+  <header class="header">
+    <div class="container">
+      <h1>My Day</h1>
+      <p>All my tasks in one place</p>
+      <input
+        class="new-todo"
+        placeholder="Type new todo"
+        autofocus
+        type="text"
+        [formControl]="newTaskControl"
+        (keydown.enter)="ImputHandler()"
+      />
+    </div>
+  </header>
+
+
+  <div class="container todoapp-wrapper">
+    <!-- This section should be hidden by default and shown when there are todos -->
+
+    <section class="main">
+      <ul class="todo-list">
+        <li
+          (dblclick)="updateTaskMode(i)"
+          *ngFor="let task of tasksbyFilter(); index as i  "
+          [class.editing]="task.editing"
+          [class.completed]="task.completed"
+        >
+          <div class="view">
+            <input
+              class="toggle"
+              type="checkbox"
+              [checked]="task.completed"
+              (change)="updateTask(i)"
+            />
+            <label>{{ task.title }}</label>
+            <button class="destroy" (click)="deleteTask(i)"></button>
+          </div>
+          <input
+            class="edit"
+            (keydown.enter)="updateTaskText(i, $event)"
+            type="text"
+            [value]="task.title"
+          />
+        </li>
+
+        <!--
+  <div class="view">
+    <input
+
+      class="toggle"
+      type="checkbox"
+      [checked]="task.completed"
+      (click)="toggleChecked(i)"
+    />
+    <label>{{ task.title }}</label>
+    <button class="destroy"></button>
+  </div>
+  <input class="edit" [value]="task.title" />
+</li>
+-->
+        <!--
+        <li class="editing">
+          <div class="view">
+            <input class="toggle" type="checkbox" />
+            <label>Make dishes</label>
+            <button class="destroy"></button>
+          </div>
+          <input class="edit" value="Make dishes" />
+        </li>
+-->
+      </ul>
+    </section>
+    <!-- This footer should be hidden by default and shown when there are todos -->
+    <footer class="footer" *ngIf="tasksbyFilter().length > 0 ">
+      <!-- This should be `0 items left` by default -->
+      <span class="todo-count"
+        ><strong></strong>
+        <div *ngIf="tasksbyFilter().length === 1 else elseBlock ">
+          {{tasksbyFilter().length}} Item
+        </div>
+        <!-- Else para pluralizar dinamicamente un texto ↓ -->
+        <div>
+          <ng-template #elseBlock> {{tasksbyFilter().length}} Items </ng-template>
+        </div></span
+      >
+      <!-- Remove this if you don't implement routing -->
+      <ul class="filters" >
+
+        <li>
+          <a (click)="ChangueFilter('all')" [class.selected]="filter() === 'all'">All</a>
+        </li>
+        <li>
+          <a (click)="ChangueFilter('Pending')" [class.selected]="filter() === 'Pending'" >Pending</a>
+        </li>
+        <li>
+          <a (click)="ChangueFilter('Completed')" [class.selected]="filter() === 'Completed'">Completed</a>
+        </li>
+      </ul>
+      <!-- Hidden if no completed items are left ↓ -->
+      <button class="clear-completed">Clear completed</button>
+    </footer>
+  </div>
+</section>

@@ -1,0 +1,59 @@
+<div class="login-container">
+  <div class="login-card">
+
+    <!-- Form section -->
+    <div class="form-section">
+      <!-- Tabs -->
+      <div class="tabs">
+        <span class="tab" [ngClass]="{ active: activeTab === 'login' }" (click)="setTab('login')">Estudiante</span>
+        <span class="tab" [ngClass]="{ active: activeTab === 'register' }" (click)="setTab('register')">Administrativo / Docente</span>
+      </div>
+  <!-- Login Form -->
+      <div *ngIf="activeTab === 'login'" class="form-content">
+        <h2 class="title">Мы скучали!</h2>
+        <p class="subtitle">Войдите, чтобы продолжить</p>
+
+        <input type="email" placeholder="Логин" class="input" />
+        <input type="password" placeholder="Пароль" class="input" />
+
+        <div class="options">
+          <label><input type="checkbox" /> Запомнить меня</label>
+          <a href="#">Забыли пароль?</a>
+        </div>
+
+        <button class="login-button">Войти</button>
+
+        <div class="social-login">
+          или войдите через<br />
+          <i class="fab fa-facebook-square"></i>
+          <i class="fab fa-google-plus-square"></i>
+        </div>
+      </div>
+
+      <!-- Register Form -->
+      <div *ngIf="activeTab === 'register'" class="form-content">
+        <h2 class="title">Мы скучали!</h2>
+        <p class="subtitle">Войдите, чтобы продолжить</p>
+
+        <input type="email" placeholder="Логин" class="input" />
+        <input type="password" placeholder="Пароль" class="input" />
+
+        <div class="options">
+          <label><input type="checkbox" /> Запомнить меня</label>
+          <a href="#">Забыли пароль?</a>
+        </div>
+
+        <button class="login-button">Войти</button>
+
+        <div class="social-login">
+          или войдите через<br />
+          <i class="fab fa-facebook-square"></i>
+          <i class="fab fa-google-plus-square"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image section -->
+    <div class="image-section" [ngStyle]="getBackgroundStyle()"></div>
+  </div>
+</div>

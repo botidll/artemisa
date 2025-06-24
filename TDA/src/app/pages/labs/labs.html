@@ -1,0 +1,122 @@
+<div class="container">
+  <h1>Hola esto es un test de app</h1>
+  <h2>{{welcome}}</h2>
+  <ul>
+    @for (task of tasks(); track $index) {
+    <li>{{task}}</li>
+    }
+  </ul>
+
+  <hr />
+
+  <h2>{{'Hola'.repeat(4)}}</h2>
+  <p>La suma de 3 más 3 es: {{ 3 + 3 }}</p>
+  <p>Hola, soy {{ name() }} y mi edad es {{ age }}</p>
+
+  <hr />
+  <img [src]="person().avatar" alt="" />
+  <input type="number" [value]="age" />
+  <button [disabled]="true">Click me</button>
+  <p>person: {{ person().name }}</p>
+
+  <hr />
+
+  <button (click)="clickHandler()">click me</button>
+  <button (dblclick)="clickHandler()">double me</button>
+  <p>(change)</p>
+  <input
+    type="number"
+    [value]="person().age"
+    (change)="changeHandler($event)"
+  />
+
+  <p>(change)</p>
+  <input type="test" [value]="person().name" (change)="changeHandler($event)" />
+
+  <p>(keydown)</p>
+  <input
+    type="test"
+    [value]="person().name"
+    (keydown)="keydownHandler($event)"
+  />
+
+  <p>(keydown con shift mas t)</p>
+  <input
+    type="test"
+    [value]="person().name"
+    (keydown.shift.t)="clickHandler()"
+  />
+
+  <hr />
+
+  <h1>Signals</h1>
+
+  <input type="test" [value]="name()" (change)="changeHandler($event)" />
+  <p>Name: {{name()}}</p>
+
+  <ul>
+    <p>total de elementos: {{tasks().length}}</p>
+    <li *ngFor="let task of tasks(); index as i">{{ i }} {{task}}</li>
+  </ul>
+
+  <hr />
+
+  <div *ngIf="1 !== 1">My content</div>
+
+  <div *ngIf="name() === 'julio'">julio es lo maximo</div>
+
+  <input type="number" [value]="person().age" (change)="changeAge($event)" />
+
+  <div *ngIf="person().name === 'julio' && person().age > 18 else elseBlock ">
+    julio es lo maximo y es mayor
+  </div>
+
+  <div>
+    <ng-template #elseBlock> soy julio y soy menor </ng-template>
+  </div>
+
+  <hr />
+
+  <input type="test" [value]="person().name" (change)="changeName($event)" />
+
+  <div [ngSwitch]="person().name">
+    <p *ngSwitchCase="'julio'">yo soy el pibito de las rozas</p>
+    <p *ngSwitchCase="'Maria'">yo soy la maria</p>
+    <p *ngSwitchCase="'Pirlo'">frio como pirlo</p>
+    <p *ngSwitchDefault>No eres nadie Pä</p>
+  </div>
+
+  <input type="color" [formControl]="colorControl" />
+  <p>color: {{ colorControl.value }}</p>
+
+  <hr />
+  <svg>
+    <g>
+      <rect
+        x="0"
+        y="0"
+        height="100"
+        width="100"
+        [attr.fill]="colorControl.value"
+      />
+    </g>
+  </svg>
+
+  <hr />
+  <input type="number" [formControl]="WidthControl" />
+  <span class="box" [style.width.px]="WidthControl.value"> </span>
+
+  <hr />
+  <p>
+    <input type="text" [formControl]="NameControl" /> <br />
+    <span
+      class="mesage-error"
+      [class.show]="NameControl.invalid && NameControl.touched "
+      >Nombre Invalido</span
+    >
+  </p>
+
+  <p>
+    <input type="text" />
+  </p>
+</div>
