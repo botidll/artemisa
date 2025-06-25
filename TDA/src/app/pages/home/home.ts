@@ -140,28 +140,35 @@ export class Home {
   ChangueFilter(filter: string){
     this.filter.set(filter);
   }
-//effects idk
-  constructor(){
 
-  }
 
+  //Constructor Faltante con error que no guarda -reparando-
+  //constructor(){
+    //effect(() => {
+      //const tasks = this.tasks();
+       //console.log('tasks');
+       //localStorage.setItem('tasks', JSON.stringify(tasks))
+    //} )
+ // }
   ngOnInit() {
-    const storage = localStorage.getItem('tasks');
-    if (storage) {
-      const tasks = JSON.parse(storage);
+   const storage = localStorage.getItem('tasks');
+   if (storage) {
+    const tasks = JSON.parse(storage);
       this.tasks.set(tasks);
     }
-    this.trackingtasks();
+    this.TrackingTask();
   }
 
-
+  //inyector
   injector = inject(Injector);
 
-  trackingtasks(){
-effect(()   =>  {
+ //esta funcion esta hecha para ubicar el effect fuera del contructor, y se le agrega un inyector
+  TrackingTask() {
+  effect(()   =>  {
       const tasks = this.tasks();
       console.log(tasks);
       localStorage.setItem('tasks', JSON.stringify(tasks))
-    }, {})
+    }, {injector: this.injector });
   }
+
 }
